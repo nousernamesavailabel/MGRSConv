@@ -3,6 +3,7 @@ Python code for converting between decimal degrees and MGRS.
 Functions:
 
   dd2mgrs: Decimal Degrees to MGRS
+
   mgrs2dd: MGRS to Decimal Degrees
 
 To install:
