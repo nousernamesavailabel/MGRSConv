@@ -1,7 +1,6 @@
 import math
 
-
-def DD2MGRS(Lat, Long):
+def dd2mgrs(Lat, Long):
     if Lat < -80:
         return 'Too far South'
     if Lat > 84:
@@ -26,13 +25,13 @@ def DD2MGRS(Lat, Long):
     y = 61.0 - 479.0 * r + 179.0 * (r * r) - (r * r * r)
     z = 1385.0 - 3111.0 * r + 543.0 * (r * r) - (r * r * r)
     aa = p * n * t + (p / 6.0 * math.pow(n, 3) * u * math.pow(t, 3)) + (
-                p / 120.0 * math.pow(n, 5) * w * math.pow(t, 5)) + (p / 5040.0 * math.pow(n, 7) * y * math.pow(t, 7))
+            p / 120.0 * math.pow(n, 5) * w * math.pow(t, 5)) + (p / 5040.0 * math.pow(n, 7) * y * math.pow(t, 7))
     ab = 6367449.14570093 * (k - (0.00251882794504 * math.sin(2 * k)) + (0.00000264354112 * math.sin(4 * k)) - (
-                0.00000000345262 * math.sin(6 * k)) + (0.000000000004892 * math.sin(8 * k))) + (
-                     q / 2.0 * p * math.pow(n, 2) * math.pow(t, 2)) + (
-                     q / 24.0 * p * math.pow(n, 4) * v * math.pow(t, 4)) + (
-                     q / 720.0 * p * math.pow(n, 6) * x * math.pow(t, 6)) + (
-                     q / 40320.0 * p * math.pow(n, 8) * z * math.pow(t, 8))
+            0.00000000345262 * math.sin(6 * k)) + (0.000000000004892 * math.sin(8 * k))) + (
+                 q / 2.0 * p * math.pow(n, 2) * math.pow(t, 2)) + (
+                 q / 24.0 * p * math.pow(n, 4) * v * math.pow(t, 4)) + (
+                 q / 720.0 * p * math.pow(n, 6) * x * math.pow(t, 6)) + (
+                 q / 40320.0 * p * math.pow(n, 8) * z * math.pow(t, 8))
     aa = aa * 0.9996 + 500000.0
     ab = ab * 0.9996
     if ab < 0.0:
@@ -62,7 +61,7 @@ def DD2MGRS(Lat, Long):
     return f'{c}{ad} {af}{ah} {aa} {ab}'
 
 # Function to convert MGRS to Latitude and Longitude
-def MGRS2DD(mgrs):
+def mgrs2dd(mgrs):
     try:
         b = mgrs.strip().split()
         if not b or len(b) != 4:
@@ -96,7 +95,7 @@ def MGRS2DD(mgrs):
 
         o = n / 6367449.14570093
         p = o + (0.0025188266133249035 * math.sin(2.0 * o)) + (0.0000037009491206268 * math.sin(4.0 * o)) + (
-                    0.0000000074477705265 * math.sin(6.0 * o)) + (0.0000000000170359940 * math.sin(8.0 * o))
+                0.0000000074477705265 * math.sin(6.0 * o)) + (0.0000000000170359940 * math.sin(8.0 * o))
         q = math.tan(p)
         r = q * q
         s = r * r
@@ -120,8 +119,13 @@ def MGRS2DD(mgrs):
         w *= v
         ae = q / (40320.0 * w)
 
-        lat = p + y * (-1.0 - u) * (m ** 2) + aa * (5.0 + 3.0 * r + 6.0 * u - 6.0 * r * u - 3.0 * (u * u) - 9.0 * r * (u * u)) * (m ** 4) + ac * (-61.0 - 90.0 * r - 45.0 * s - 107.0 * u + 162.0 * r * u) * (m ** 6) + ae * (1385.0 + 3633.0 * r + 4095.0 * s + 1575 * (s * r)) * (m ** 8)
-        lng = e + x * m + z * (-1.0 - 2 * r - u) * (m ** 3) + ab * (5.0 + 28.0 * r + 24.0 * s + 6.0 * u + 8.0 * r * u) * (m ** 5) + ad * (-61.0 - 662.0 * r - 1320.0 * s - 720.0 * (s * r)) * (m ** 7)
+        lat = p + y * (-1.0 - u) * (m ** 2) + aa * (
+                    5.0 + 3.0 * r + 6.0 * u - 6.0 * r * u - 3.0 * (u * u) - 9.0 * r * (u * u)) * (m ** 4) + ac * (
+                          -61.0 - 90.0 * r - 45.0 * s - 107.0 * u + 162.0 * r * u) * (m ** 6) + ae * (
+                          1385.0 + 3633.0 * r + 4095.0 * s + 1575 * (s * r)) * (m ** 8)
+        lng = e + x * m + z * (-1.0 - 2 * r - u) * (m ** 3) + ab * (
+                    5.0 + 28.0 * r + 24.0 * s + 6.0 * u + 8.0 * r * u) * (m ** 5) + ad * (
+                          -61.0 - 662.0 * r - 1320.0 * s - 720.0 * (s * r)) * (m ** 7)
 
         return True, lat * 180 / math.pi, lng * 180 / math.pi
 
@@ -129,7 +133,3 @@ def MGRS2DD(mgrs):
         print(f"Error converting MGRS: {e}")
         return False, None, None
 
-#Example code
-#mgrs = "17R LL 12345 54321"
-#ll = MGRS2DD(mgrs)
-#print(ll)
