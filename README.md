@@ -23,6 +23,7 @@ Sample output:
   "True" in this case means the conversion was successful, the coordinates functionally represent 0 degrees latitude and 0 degrees longitude in decimal.
 
 Package available here: https://pypi.org/project/mgrsconv/
+
 GitHub: https://github.com/nousernamesavailabel/MGRSConv
 
 Planning for next version to include DMS coordinates. 
