@@ -58,6 +58,9 @@ def dd2mgrs(Lat, Long):
     ab = math.floor(ab % 100000)
     ab = pad(ab)
 
+    if c < 10:
+        c = (str(c).zfill(2))
+
     return f'{c}{ad} {af}{ah} {aa} {ab}'
 
 # Function to convert MGRS to Latitude and Longitude
@@ -133,3 +136,6 @@ def mgrs2dd(mgrs):
         print(f"Error converting MGRS: {e}")
         return False, None, None
 
+if __name__ =='__main__':
+    print(mgrs2dd('02C NS 00000 18414'))
+    print(dd2mgrs(-80.00000,-171.0))
